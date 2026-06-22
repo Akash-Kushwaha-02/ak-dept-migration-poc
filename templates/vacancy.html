@@ -29,10 +29,14 @@
         <div>
             <div class="vacancy-description">
                 <div>
-                    <div>{{{content}}}</div>
+                    <div id="job-content">{{{content}}}</div>
                 </div>
             </div>
         </div>
+        <script>
+            const el = document.getElementById('job-content');
+            el.innerHTML = el.textContent;
+        </script>
 
         <hr>
 
