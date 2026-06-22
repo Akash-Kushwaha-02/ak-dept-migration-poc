@@ -1,5 +1,8 @@
-/* ─────────────────────────────────────────────
+﻿/* ─────────────────────────────────────────────
    Culture Teaser Block
+   EDS DOM: 1 row, 2 cells (text | images)
+   .culture-teaser > div > div:first-child = text
+   .culture-teaser > div > div:last-child  = images
    ───────────────────────────────────────────── */
 
 .culture-teaser-container {
@@ -12,139 +15,139 @@
   padding: 0;
 }
 
-/* ── Two-column shell ────────────────────────── */
-.culture-teaser {
+/* ── Single row ──────────────────────────────── */
+.culture-teaser > div {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 560px;
-  background-color: #fff;
 }
 
-/* ── Text column ─────────────────────────────── */
-.culture-teaser__text {
+/* ── Text column (left) ──────────────────────── */
+.culture-teaser > div > div:first-child {
+  background-color: #f9f9f9;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 64px 72px;
   gap: 24px;
-  padding: 80px 64px;
   box-sizing: border-box;
 }
 
-.culture-teaser__label {
+/* Label: DEPT®/CULTURE */
+.culture-teaser > div > div:first-child > p:first-of-type {
   font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0.3px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #767676;
-  margin: 0;
-}
-
-.culture-teaser__heading {
-  font-size: 60px;
-  font-weight: 400;
-  line-height: 1.13;
   color: #121212;
   margin: 0;
 }
 
-.culture-teaser__desc {
-  font-size: 16px;
-  line-height: 1.65;
-  color: #646464;
+/* Heading */
+.culture-teaser > div > div:first-child > h2 {
+  font-size: clamp(36px, 3.5vw, 52px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #121212;
   margin: 0;
-  max-width: 440px;
 }
 
-.culture-teaser__cta {
+/* Description paragraph */
+.culture-teaser > div > div:first-child > p:not(:first-of-type) {
+  font-size: 18px;
+  color: #767676;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* CTA link */
+.culture-teaser > div > div:first-child > a {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   background-color: #5115f7;
   color: #fff;
-  text-decoration: none;
   border-radius: 1600px;
-  padding: 12px 24px;
+  padding: 14px 28px;
   font-size: 15px;
   font-weight: 600;
-  font-family: inherit;
-  width: fit-content;
+  text-decoration: none;
+  align-self: flex-start;
+  margin-top: 8px;
   transition: background-color 0.2s ease;
 }
 
-.culture-teaser__cta:hover,
-.culture-teaser__cta:focus-visible {
+.culture-teaser > div > div:first-child > a:hover {
   background-color: #3a0fc7;
-  color: #fff;
-  text-decoration: none;
-  outline-offset: 2px;
 }
 
-/* ── Images column (2 × 2 grid) ──────────────── */
-.culture-teaser__images {
+/* ── Images column (right) ───────────────────── */
+.culture-teaser > div > div:last-child {
   display: grid;
   grid-template-columns: 3fr 2fr;
   grid-template-rows: 1fr 1fr;
-}
-
-.culture-teaser__image {
   overflow: hidden;
 }
 
-.culture-teaser__image img {
+/* AEM wraps each <picture> in a <p> */
+.culture-teaser > div > div:last-child > p {
+  margin: 0;
+  overflow: hidden;
+}
+
+.culture-teaser > div > div:last-child img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-/* Wider image top-left, narrow top-right */
-.culture-teaser__image--tl {
-  grid-column: 1;
-  grid-row: 1;
+/* Grid positions: tl, tr, bl, br */
+.culture-teaser > div > div:last-child > p:nth-child(1) { grid-column: 1; grid-row: 1; }
+.culture-teaser > div > div:last-child > p:nth-child(2) { grid-column: 2; grid-row: 1; }
+.culture-teaser > div > div:last-child > p:nth-child(3) { grid-column: 1; grid-row: 2; }
+.culture-teaser > div > div:last-child > p:nth-child(4) { grid-column: 2; grid-row: 2; }
+
+/* Fallback: when AEM generates a single div cell per image
+   (no wrapping p tag) */
+.culture-teaser > div > div:last-child > div {
+  margin: 0;
+  overflow: hidden;
 }
 
-.culture-teaser__image--tr {
-  grid-column: 2;
-  grid-row: 1;
+.culture-teaser > div > div:last-child > div:nth-child(1) { grid-column: 1; grid-row: 1; }
+.culture-teaser > div > div:last-child > div:nth-child(2) { grid-column: 2; grid-row: 1; }
+.culture-teaser > div > div:last-child > div:nth-child(3) { grid-column: 1; grid-row: 2; }
+.culture-teaser > div > div:last-child > div:nth-child(4) { grid-column: 2; grid-row: 2; }
+
+.culture-teaser > div > div:last-child > div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.culture-teaser__image--bl {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.culture-teaser__image--br {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-/* ── Tablet ──────────────────────────────────── */
-@media (width >= 600px) and (width < 900px) {
-  .culture-teaser__text {
-    padding: 60px 40px;
-  }
-
-  .culture-teaser__heading {
-    font-size: 42px;
-  }
-}
-
-/* ── Mobile ──────────────────────────────────── */
-@media (width < 600px) {
-  .culture-teaser {
+/* ── Tablet / Mobile ─────────────────────────── */
+@media (width < 900px) {
+  .culture-teaser > div {
     grid-template-columns: 1fr;
   }
 
-  .culture-teaser__text {
-    padding: 56px 24px 48px;
-    gap: 20px;
+  .culture-teaser > div > div:first-child {
+    padding: 56px 40px;
   }
 
-  .culture-teaser__heading {
-    font-size: 36px;
+  .culture-teaser > div > div:last-child {
+    min-height: 420px;
+  }
+}
+
+@media (width < 600px) {
+  .culture-teaser > div > div:first-child {
+    padding: 48px 24px;
   }
 
-  .culture-teaser__images {
-    height: 400px;
+  .culture-teaser > div > div:first-child > h2 {
+    font-size: 32px;
   }
 }

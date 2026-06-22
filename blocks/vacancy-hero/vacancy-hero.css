@@ -1,8 +1,11 @@
-/* ─────────────────────────────────────────────
+﻿/* ─────────────────────────────────────────────
    Vacancy Hero Block
+   Targets EDS block table DOM:
+     .vacancy-hero > div       = row
+     .vacancy-hero > div > div = cell
    ───────────────────────────────────────────── */
 
-/* Reset outer wrappers so the hero spans full width */
+/* Full-bleed */
 .vacancy-hero-container {
   max-width: unset;
   padding: 0;
@@ -13,270 +16,173 @@
   padding: 0;
 }
 
-/* ── Hero shell ──────────────────────────────── */
+/* ── Hero shell ────────────────────────────── */
 .vacancy-hero {
   background-color: #fff;
   display: grid;
-  grid-template-rows: auto 1fr auto auto;
+  grid-template-rows: 1fr auto;
   min-height: 100svh;
   padding: 0 64px;
   box-sizing: border-box;
 }
 
-/* ── Breadcrumbs ─────────────────────────────── */
-.vacancy-hero__breadcrumbs {
-  margin-top: calc(var(--nav-height, 64px) + 12px);
-  align-self: flex-start;
-}
-
-.vacancy-hero__breadcrumbs ol {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.vacancy-hero__breadcrumbs li {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 16px;
-  color: #c4c4c4;
-}
-
-.vacancy-hero__breadcrumbs a {
-  color: #c4c4c4;
-  text-decoration: none;
-}
-
-.vacancy-hero__breadcrumbs a:hover {
-  color: #121212;
-  text-decoration: underline;
-}
-
-/* ── Main two-column row ─────────────────────── */
-.vacancy-hero__main {
+/* ── Row 1: main (text | images) ───────────── */
+.vacancy-hero > div:first-child {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: 32px;
+  gap: 40px;
+  padding-top: calc(var(--nav-height, 64px) + 48px);
+  padding-bottom: 32px;
 }
 
-/* ── Left text column ────────────────────────── */
-.vacancy-hero__left {
-  display: grid;
-  grid-template-areas:
-    "label label"
-    "title share";
-  grid-template-columns: 1fr auto;
-  row-gap: 30px;
-  column-gap: 24px;
-  padding-right: 24px;
+/* Left cell */
+.vacancy-hero > div:first-child > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
-.vacancy-hero__label {
-  grid-area: label;
-  font-size: 16px;
+/* Label */
+.vacancy-hero > div:first-child > div:first-child > p:first-of-type {
+  font-size: 15px;
   font-weight: 400;
-  letter-spacing: 0.24px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #121212;
   margin: 0;
-  font-family: inherit;
 }
 
-.vacancy-hero__title {
-  grid-area: title;
-  font-size: 70px;
+/* H1 */
+.vacancy-hero > div:first-child > div:first-child > h1 {
+  font-size: clamp(42px, 4.5vw, 70px);
   font-weight: 400;
-  line-height: 1.11;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
   color: #121212;
   margin: 0;
 }
 
-/* ── Social share ────────────────────────────── */
-.vacancy-hero__share {
-  grid-area: share;
+/* Share links paragraph */
+.vacancy-hero > div:first-child > div:first-child > p:has(> a) {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  align-self: end;
-  padding-bottom: 4px;
+  margin: 0;
 }
 
-.vacancy-hero__share-link {
+.vacancy-hero > div:first-child > div:first-child > p:has(> a) > a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  color: #121212;
-  border: 1px solid #c4c4c4;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid #c4c4c4;
   border-radius: 50%;
+  color: #121212;
   text-decoration: none;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
   flex-shrink: 0;
 }
 
-.vacancy-hero__share-link:hover,
-.vacancy-hero__share-link:focus-visible {
+.vacancy-hero > div:first-child > div:first-child > p:has(> a) > a:hover {
   background-color: #5115f7;
   border-color: #5115f7;
   color: #fff;
-  text-decoration: none;
-  outline-offset: 2px;
 }
 
-/* ── Right images column ─────────────────────── */
-.vacancy-hero__images {
+/* Right cell: images */
+.vacancy-hero > div:first-child > div:last-child {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   align-items: flex-end;
   height: 100%;
-  max-height: 600px;
-  padding: 40px 0;
+  max-height: 580px;
+  padding: 32px 0;
 }
 
-.vacancy-hero__image-left {
-  flex: 0 0 auto;
-  width: 48%;
+/* AEM wraps picture in p */
+.vacancy-hero > div:first-child > div:last-child > p {
+  margin: 0;
+  flex: 1;
   height: 100%;
+  overflow: hidden;
 }
 
-.vacancy-hero__image-right {
-  flex: 0 0 auto;
-  width: 52%;
-  height: 100%;
+.vacancy-hero > div:first-child > div:last-child > p:last-child {
   align-self: flex-start;
-  padding-top: 60px;
+  padding-top: 56px;
 }
 
-.vacancy-hero__image-left img,
-.vacancy-hero__image-right img {
+.vacancy-hero > div:first-child > div:last-child img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-/* ── Locations text ──────────────────────────── */
-.vacancy-hero__locations {
+/* ── Row 2: footer (locations | scroll) ──────── */
+.vacancy-hero > div:last-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0 36px;
+  border-top: 1px solid #f2f2f2;
+}
+
+.vacancy-hero > div:last-child > div:first-child > p {
   font-size: 14px;
   color: #767676;
   margin: 0;
-  padding: 16px 0 0;
-  align-self: flex-start;
 }
 
-/* ── Scroll-down indicator ───────────────────── */
-.vacancy-hero__scroll {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+.vacancy-hero > div:last-child > div:last-child > a {
   font-size: 14px;
   color: #121212;
   text-decoration: none;
-  padding: 20px 0 32px;
-  align-self: flex-end;
-  width: fit-content;
-  transition: color 0.2s ease;
-}
-
-.vacancy-hero__scroll:hover {
-  color: #5115f7;
-  text-decoration: none;
-}
-
-.vacancy-hero__scroll:focus-visible {
-  outline: 2px solid #5115f7;
-  outline-offset: 4px;
-}
-
-/* ── Sticky Apply button ─────────────────────── */
-.vacancy-hero__sticky-apply {
-  position: fixed;
-  bottom: 28px;
-  right: 28px;
-  z-index: 100;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  background-color: #5115f7;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 1600px;
-  padding: 14px 28px;
-  font-size: 15px;
-  font-weight: 600;
-  font-family: inherit;
-  box-shadow: 0 4px 24px rgb(81 21 247 / 30%);
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  gap: 6px;
+  transition: color 0.2s;
 }
 
-.vacancy-hero__sticky-apply:hover {
-  background-color: #3a0fc7;
-  box-shadow: 0 6px 32px rgb(81 21 247 / 45%);
-  text-decoration: none;
-  color: #fff;
+.vacancy-hero > div:last-child > div:last-child > a:hover {
+  color: #5115f7;
 }
 
-.vacancy-hero__sticky-apply:focus-visible {
-  outline: 3px solid #5115f7;
-  outline-offset: 3px;
-  color: #fff;
-}
-
-/* ── Tablet ──────────────────────────────────── */
+/* ── Tablet ────────────────────────────────── */
 @media (width >= 600px) and (width < 900px) {
   .vacancy-hero {
     padding: 0 40px;
   }
-
-  .vacancy-hero__title {
-    font-size: 52px;
-  }
 }
 
-/* ── Mobile ──────────────────────────────────── */
+/* ── Mobile ────────────────────────────────── */
 @media (width < 600px) {
   .vacancy-hero {
     padding: 0 24px;
-    min-height: auto;
-    padding-bottom: 40px;
+    grid-template-rows: auto auto;
   }
 
-  .vacancy-hero__main {
+  .vacancy-hero > div:first-child {
     grid-template-columns: 1fr;
+    gap: 24px;
+    padding-top: calc(var(--nav-height, 64px) + 32px);
   }
 
-  .vacancy-hero__images {
+  .vacancy-hero > div:first-child > div:last-child {
     display: none;
   }
 
-  .vacancy-hero__title {
-    font-size: 38px;
+  .vacancy-hero > div:first-child > div:first-child > h1 {
+    font-size: 40px;
   }
 
-  .vacancy-hero__left {
-    grid-template-areas:
-      "label"
-      "title"
-      "share";
-    grid-template-columns: 1fr;
-    row-gap: 20px;
-  }
-
-  .vacancy-hero__share {
-    flex-direction: row;
-    align-self: auto;
-  }
-
-  .vacancy-hero__sticky-apply {
-    bottom: 16px;
-    right: 16px;
-    padding: 12px 22px;
-    font-size: 14px;
+  .vacancy-hero > div:last-child {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
 }

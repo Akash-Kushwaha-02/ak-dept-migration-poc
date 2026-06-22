@@ -1,10 +1,8 @@
-/* ─────────────────────────────────────────────
+﻿/* ─────────────────────────────────────────────
    Vacancy Meta Block
+   EDS DOM: .vacancy-meta > div (row) > div (cell)
+   Rows displayed as horizontal flex items
    ───────────────────────────────────────────── */
-
-.vacancy-meta-container {
-  max-width: unset;
-}
 
 .vacancy-meta-wrapper {
   max-width: 1200px;
@@ -21,34 +19,31 @@
   border-top: 1px solid #f2f2f2;
 }
 
-.vacancy-meta__item {
+/* Each row = one metadata item */
+.vacancy-meta > div {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
-.vacancy-meta__label {
-  font-size: 12px;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+/* Label cell */
+.vacancy-meta > div > div:first-child > p {
+  font-size: 13px;
   color: #767676;
+  font-weight: 400;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-.vacancy-meta__value {
-  font-size: 15px;
-  font-weight: 500;
+/* Value cell */
+.vacancy-meta > div > div:last-child > p {
+  font-size: 16px;
   color: #121212;
+  font-weight: 600;
+  margin: 0;
 }
 
-/* ── Tablet ──────────────────────────────────── */
-@media (width >= 600px) and (width < 900px) {
-  .vacancy-meta-wrapper {
-    padding: 0 40px;
-  }
-}
-
-/* ── Mobile ──────────────────────────────────── */
 @media (width < 600px) {
   .vacancy-meta-wrapper {
     padding: 0 24px;
