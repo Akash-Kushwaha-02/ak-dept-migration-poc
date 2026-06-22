@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{meta.title}}</title>
+    <link rel="canonical" href="{{meta.canonicalUrl}}">
+    <meta name="description" content="{{meta.description}}">
+    <meta property="og:title" content="{{meta.ogTitle}}">
+    <meta property="og:description" content="{{meta.ogDescription}}">
+    <meta property="og:url" content="{{meta.canonicalUrl}}">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{meta.ogTitle}}">
+    <meta name="twitter:description" content="{{meta.ogDescription}}">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script nonce="aem" src="/scripts/aem.js" type="module"></script>
+    <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css">
+</head>
+
+<body>
+    <header></header>
+    <main>
+
+
+
+        <!-- Section 2: Job Description (raw Greenhouse HTML — triple-mustache keeps HTML unescaped) -->
+        <div>
+            <div class="vacancy-description">
+                <div>
+                    <div>{{{content}}}</div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+
+    </main>
+    <footer></footer>
+</body>
+
+</html>
