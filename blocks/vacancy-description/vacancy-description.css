@@ -1,0 +1,135 @@
+/* ─────────────────────────────────────────────
+   Vacancy Description Block
+   ───────────────────────────────────────────── */
+
+.vacancy-description-container {
+  max-width: unset;
+}
+
+.vacancy-description-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 64px 80px;
+  box-sizing: border-box;
+}
+
+.vacancy-description {
+  max-width: 800px;
+}
+
+/* ── Header (title + apply) ──────────────────── */
+.vacancy-description__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.vacancy-description__title {
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #121212;
+  margin: 0;
+  flex: 1 1 auto;
+}
+
+.vacancy-description__apply {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #5115f7;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 1600px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.vacancy-description__apply:hover,
+.vacancy-description__apply:focus-visible {
+  background-color: #3a0fc7;
+  color: #fff;
+  text-decoration: none;
+  outline-offset: 2px;
+}
+
+/* ── Rich text content ───────────────────────── */
+.vacancy-description__content {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #121212;
+}
+
+.vacancy-description__content p {
+  margin: 0 0 16px;
+}
+
+.vacancy-description__content ul,
+.vacancy-description__content ol {
+  padding-left: 24px;
+  margin: 0 0 16px;
+}
+
+.vacancy-description__content li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.vacancy-description__content strong {
+  font-weight: 600;
+}
+
+.vacancy-description__content a {
+  color: #5115f7;
+  text-decoration: underline;
+}
+
+.vacancy-description__content a:hover {
+  color: #3a0fc7;
+}
+
+/* ── Salary / compensation box ───────────────── */
+.vacancy-description__content .salary-range,
+.vacancy-description__content [class*="salary"] {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 32px 0;
+}
+
+/* ── Tablet ──────────────────────────────────── */
+@media (width >= 600px) and (width < 900px) {
+  .vacancy-description-wrapper {
+    padding: 48px 40px 60px;
+  }
+
+  .vacancy-description__title {
+    font-size: 36px;
+  }
+}
+
+/* ── Mobile ──────────────────────────────────── */
+@media (width < 600px) {
+  .vacancy-description-wrapper {
+    padding: 40px 24px 60px;
+  }
+
+  .vacancy-description__title {
+    font-size: 28px;
+  }
+
+  .vacancy-description__header {
+    flex-direction: column;
+    gap: 16px;
+  }
+}

@@ -1,0 +1,60 @@
+/* ─────────────────────────────────────────────
+   Vacancy Meta Block
+   ───────────────────────────────────────────── */
+
+.vacancy-meta-container {
+  max-width: unset;
+}
+
+.vacancy-meta-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 64px;
+  box-sizing: border-box;
+}
+
+.vacancy-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  padding: 36px 0;
+  border-top: 1px solid #f2f2f2;
+}
+
+.vacancy-meta__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vacancy-meta__label {
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #767676;
+}
+
+.vacancy-meta__value {
+  font-size: 15px;
+  font-weight: 500;
+  color: #121212;
+}
+
+/* ── Tablet ──────────────────────────────────── */
+@media (width >= 600px) and (width < 900px) {
+  .vacancy-meta-wrapper {
+    padding: 0 40px;
+  }
+}
+
+/* ── Mobile ──────────────────────────────────── */
+@media (width < 600px) {
+  .vacancy-meta-wrapper {
+    padding: 0 24px;
+  }
+
+  .vacancy-meta {
+    gap: 24px;
+  }
+}

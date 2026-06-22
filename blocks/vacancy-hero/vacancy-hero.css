@@ -1,0 +1,282 @@
+/* ─────────────────────────────────────────────
+   Vacancy Hero Block
+   ───────────────────────────────────────────── */
+
+/* Reset outer wrappers so the hero spans full width */
+.vacancy-hero-container {
+  max-width: unset;
+  padding: 0;
+}
+
+.vacancy-hero-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+/* ── Hero shell ──────────────────────────────── */
+.vacancy-hero {
+  background-color: #fff;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  min-height: 100svh;
+  padding: 0 64px;
+  box-sizing: border-box;
+}
+
+/* ── Breadcrumbs ─────────────────────────────── */
+.vacancy-hero__breadcrumbs {
+  margin-top: calc(var(--nav-height, 64px) + 12px);
+  align-self: flex-start;
+}
+
+.vacancy-hero__breadcrumbs ol {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.vacancy-hero__breadcrumbs li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  color: #c4c4c4;
+}
+
+.vacancy-hero__breadcrumbs a {
+  color: #c4c4c4;
+  text-decoration: none;
+}
+
+.vacancy-hero__breadcrumbs a:hover {
+  color: #121212;
+  text-decoration: underline;
+}
+
+/* ── Main two-column row ─────────────────────── */
+.vacancy-hero__main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 32px;
+}
+
+/* ── Left text column ────────────────────────── */
+.vacancy-hero__left {
+  display: grid;
+  grid-template-areas:
+    "label label"
+    "title share";
+  grid-template-columns: 1fr auto;
+  row-gap: 30px;
+  column-gap: 24px;
+  padding-right: 24px;
+}
+
+.vacancy-hero__label {
+  grid-area: label;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.24px;
+  text-transform: uppercase;
+  color: #121212;
+  margin: 0;
+  font-family: inherit;
+}
+
+.vacancy-hero__title {
+  grid-area: title;
+  font-size: 70px;
+  font-weight: 400;
+  line-height: 1.11;
+  color: #121212;
+  margin: 0;
+}
+
+/* ── Social share ────────────────────────────── */
+.vacancy-hero__share {
+  grid-area: share;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-self: end;
+  padding-bottom: 4px;
+}
+
+.vacancy-hero__share-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: #121212;
+  border: 1px solid #c4c4c4;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.vacancy-hero__share-link:hover,
+.vacancy-hero__share-link:focus-visible {
+  background-color: #5115f7;
+  border-color: #5115f7;
+  color: #fff;
+  text-decoration: none;
+  outline-offset: 2px;
+}
+
+/* ── Right images column ─────────────────────── */
+.vacancy-hero__images {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  height: 100%;
+  max-height: 600px;
+  padding: 40px 0;
+}
+
+.vacancy-hero__image-left {
+  flex: 0 0 auto;
+  width: 48%;
+  height: 100%;
+}
+
+.vacancy-hero__image-right {
+  flex: 0 0 auto;
+  width: 52%;
+  height: 100%;
+  align-self: flex-start;
+  padding-top: 60px;
+}
+
+.vacancy-hero__image-left img,
+.vacancy-hero__image-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Locations text ──────────────────────────── */
+.vacancy-hero__locations {
+  font-size: 14px;
+  color: #767676;
+  margin: 0;
+  padding: 16px 0 0;
+  align-self: flex-start;
+}
+
+/* ── Scroll-down indicator ───────────────────── */
+.vacancy-hero__scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #121212;
+  text-decoration: none;
+  padding: 20px 0 32px;
+  align-self: flex-end;
+  width: fit-content;
+  transition: color 0.2s ease;
+}
+
+.vacancy-hero__scroll:hover {
+  color: #5115f7;
+  text-decoration: none;
+}
+
+.vacancy-hero__scroll:focus-visible {
+  outline: 2px solid #5115f7;
+  outline-offset: 4px;
+}
+
+/* ── Sticky Apply button ─────────────────────── */
+.vacancy-hero__sticky-apply {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #5115f7;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 1600px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  box-shadow: 0 4px 24px rgb(81 21 247 / 30%);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vacancy-hero__sticky-apply:hover {
+  background-color: #3a0fc7;
+  box-shadow: 0 6px 32px rgb(81 21 247 / 45%);
+  text-decoration: none;
+  color: #fff;
+}
+
+.vacancy-hero__sticky-apply:focus-visible {
+  outline: 3px solid #5115f7;
+  outline-offset: 3px;
+  color: #fff;
+}
+
+/* ── Tablet ──────────────────────────────────── */
+@media (width >= 600px) and (width < 900px) {
+  .vacancy-hero {
+    padding: 0 40px;
+  }
+
+  .vacancy-hero__title {
+    font-size: 52px;
+  }
+}
+
+/* ── Mobile ──────────────────────────────────── */
+@media (width < 600px) {
+  .vacancy-hero {
+    padding: 0 24px;
+    min-height: auto;
+    padding-bottom: 40px;
+  }
+
+  .vacancy-hero__main {
+    grid-template-columns: 1fr;
+  }
+
+  .vacancy-hero__images {
+    display: none;
+  }
+
+  .vacancy-hero__title {
+    font-size: 38px;
+  }
+
+  .vacancy-hero__left {
+    grid-template-areas:
+      "label"
+      "title"
+      "share";
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+  }
+
+  .vacancy-hero__share {
+    flex-direction: row;
+    align-self: auto;
+  }
+
+  .vacancy-hero__sticky-apply {
+    bottom: 16px;
+    right: 16px;
+    padding: 12px 22px;
+    font-size: 14px;
+  }
+}
