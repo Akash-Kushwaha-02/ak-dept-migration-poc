@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Vacancy Hero block - runtime share URL updater.
  * AEM backend strips data-share attributes; identify links by href pattern.
  * @param {Element} block

@@ -33,7 +33,13 @@
   flex: 1;
 }
 
-/* Apply button */
+/* Content-area links (less specific plain a — before all a:hover) */
+.vacancy-description > div:last-child > div a {
+  color: #5115f7;
+  text-decoration: underline;
+}
+
+/* Apply button (less specific plain a — before a:hover) */
 .vacancy-description > div:first-child > div > a {
   display: inline-flex;
   align-items: center;
@@ -53,6 +59,11 @@
 
 .vacancy-description > div:first-child > div > a:hover {
   background-color: #3a0fc7;
+}
+
+/* Content-area link hover — same specificity as apply button hover, after plain a */
+.vacancy-description > div:last-child > div a:hover {
+  color: #3a0fc7;
 }
 
 /* ── Row 2: job description content ──────────── */
@@ -87,15 +98,6 @@
   font-weight: 600;
   color: #121212;
   margin: 40px 0 12px;
-}
-
-.vacancy-description > div:last-child > div a {
-  color: #5115f7;
-  text-decoration: underline;
-}
-
-.vacancy-description > div:last-child > div a:hover {
-  color: #3a0fc7;
 }
 
 @media (width < 900px) {

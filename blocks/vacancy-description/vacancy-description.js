@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Vacancy Description block - sets Apply button href from job ID in pathname.
  * EDS DOM: row 1 > single cell > (h2, a[Apply])
  * @param {Element} block
