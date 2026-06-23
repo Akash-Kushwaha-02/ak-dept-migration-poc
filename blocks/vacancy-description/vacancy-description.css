@@ -24,9 +24,9 @@ main > .section > .vacancy-description-wrapper {
 }
 
 .vacancy-description > div:first-child > div > h2 {
-  font-size: clamp(36px, 4vw, 60px);
+  font-size: 48px;
   font-weight: 400;
-  line-height: 1.08;
+  line-height: 1.1;
   letter-spacing: -0.02em;
   color: #121212;
   margin: 0;

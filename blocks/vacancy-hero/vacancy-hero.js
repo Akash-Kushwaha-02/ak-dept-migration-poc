@@ -80,15 +80,15 @@ export default function decorate(block) {
     if (liLink) liLink.href = `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}`;
   }
 
-  // ── 3. Add scroll-down footer row (if not already present) ───
+  // ── 3. Decorate footer row (scroll down + roles open in) ───────
+  const scrollAnchor = document.getElementById('vacancy-description-container')
+    ? 'vacancy-description-container'
+    : 'vacancy-description-section';
+
   if (rows.length < 2) {
+    // No footer row authored — create one with just the scroll link
     const footer = document.createElement('div');
     footer.classList.add('vacancy-hero-footer');
-
-    const scrollAnchor = document.getElementById('vacancy-description-container')
-      ? 'vacancy-description-container'
-      : 'vacancy-description-section';
-
     footer.innerHTML = `
       <div class="vacancy-hero-footer-scroll">
         <a class="vacancy-hero-scroll-link" href="#${scrollAnchor}">
@@ -99,6 +99,22 @@ export default function decorate(block) {
     `;
     block.appendChild(footer);
   } else {
-    rows[1].classList.add('vacancy-hero-footer');
+    // Footer row exists in template — decorate its cells
+    const footer = rows[1];
+    footer.classList.add('vacancy-hero-footer');
+
+    const scrollCell = footer.querySelector(':scope > div:first-child');
+    if (scrollCell) {
+      scrollCell.classList.add('vacancy-hero-footer-scroll');
+      const link = scrollCell.querySelector('a');
+      if (link) {
+        link.classList.add('vacancy-hero-scroll-link');
+        link.setAttribute('href', `#${scrollAnchor}`);
+        link.innerHTML = `<span class="vacancy-hero-scroll-label">Scroll down</span>${SVG.scrollDown}`;
+      }
+    }
+
+    const rolesCell = footer.querySelector(':scope > div:last-child');
+    if (rolesCell) rolesCell.classList.add('vacancy-hero-footer-roles');
   }
 }

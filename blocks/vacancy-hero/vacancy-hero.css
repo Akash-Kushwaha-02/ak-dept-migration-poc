@@ -37,7 +37,6 @@ main > .section.vacancy-hero-container > .vacancy-hero-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: end;
-  gap: 48px;
   padding: calc(var(--nav-height, 64px) + 80px) 64px 48px;
 }
 
@@ -48,19 +47,20 @@ main > .section.vacancy-hero-container > .vacancy-hero-wrapper {
   gap: 28px;
 }
 
-/* AEM wraps each picture in a <p> — less specific than p:first-of-type, declared first */
-.vacancy-hero-images > p {
-  margin: 0;
+/* AEM wraps <picture> in <p>; template uses <picture> directly — both handled */
+.vacancy-hero-images > p,
+.vacancy-hero-images > picture {
+  display: block;
   flex: 1;
+  margin: 0;
   overflow: hidden;
-  min-height: 360px;
-  max-height: 540px;
+  height: 560px;
 }
 
-/* Second image: offset downward for stagger */
-.vacancy-hero-images > p:last-child {
-  align-self: flex-end;
-  margin-top: 56px;
+/* Second image (landscape): shorter; parent align-items: flex-end creates the stagger */
+.vacancy-hero-images > p:last-child,
+.vacancy-hero-images > picture:last-child {
+  height: 400px;
 }
 
 /* Overline: "DEPT®/Paid Media" */
@@ -118,8 +118,7 @@ main > .section.vacancy-hero-container > .vacancy-hero-wrapper {
   display: flex;
   flex-direction: row;
   gap: 14px;
-  align-items: flex-start;
-  height: 100%;
+  align-items: flex-end;
   overflow: hidden;
 }
 
@@ -130,13 +129,21 @@ main > .section.vacancy-hero-container > .vacancy-hero-wrapper {
   display: block;
 }
 
-/* ── Footer row (scroll-down) ─────────────────────────────── */
+/* ── Footer row (scroll-down + roles) ────────────────────────── */
 .vacancy-hero-footer {
   align-items: center;
   border-top: 1px solid #f2f2f2;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding: 20px 64px 36px;
+}
+
+.vacancy-hero-footer .vacancy-hero-footer-roles p {
+  font-size: 14px;
+  color: #767676;
+  letter-spacing: 0.02em;
+  margin: 0;
+  text-align: right;
 }
 
 .vacancy-hero-footer-scroll {
@@ -178,6 +185,16 @@ main > .section.vacancy-hero-container > .vacancy-hero-wrapper {
     padding-left: 40px;
     padding-right: 40px;
   }
+
+  .vacancy-hero-images > p:first-child,
+  .vacancy-hero-images > picture:first-child {
+    height: 400px;
+  }
+
+  .vacancy-hero-images > p:last-child,
+  .vacancy-hero-images > picture:last-child {
+    height: 280px;
+  }
 }
 
 /* ── Mobile (< 600px) ────────────────────────────────────── */
@@ -192,9 +209,14 @@ main > .section.vacancy-hero-container > .vacancy-hero-wrapper {
     font-size: 40px;
   }
 
-  .vacancy-hero-images {
-    max-height: 240px;
-    min-height: 200px;
+  .vacancy-hero-images > p:first-child,
+  .vacancy-hero-images > picture:first-child {
+    height: 180px;
+  }
+
+  .vacancy-hero-images > p:last-child,
+  .vacancy-hero-images > picture:last-child {
+    height: 180px;
   }
 
   .vacancy-hero-footer {

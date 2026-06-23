@@ -8,6 +8,10 @@ helix-importer-ui
 *.bak
 .idea
 
+# Temporary dev/debug scripts
+playwright-*.js
+screenshots/
+
 # Ensure these files are tracked
 !CLAUDE.md
 !AGENTS.md
