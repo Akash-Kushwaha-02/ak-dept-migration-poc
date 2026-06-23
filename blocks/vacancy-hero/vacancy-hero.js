@@ -33,7 +33,13 @@ export default function decorate(block) {
   // ── Mark cells ────────────────────────────────────────────────
   mainRow.classList.add('vacancy-hero-main-row');
   if (leftCell) leftCell.classList.add('vacancy-hero-content');
-  if (rightCell) rightCell.classList.add('vacancy-hero-images');
+  if (rightCell) {
+    rightCell.classList.add('vacancy-hero-images');
+    // EDS wraps blank lines between images in empty <p> tags — remove them
+    rightCell.querySelectorAll(':scope > p').forEach((p) => {
+      if (!p.querySelector('picture, img')) p.remove();
+    });
+  }
 
   // ── 1. Insert H1 job title ───────────────────────────────────
   if (leftCell && pageTitle && !leftCell.querySelector('h1')) {
