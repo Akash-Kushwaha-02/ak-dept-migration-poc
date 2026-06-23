@@ -1,1 +1,45 @@
 /* add global styles that can be loaded post LCP here */
+
+/* ── Vacancy description section (transformed from default-content-wrapper) ─ */
+.vacancy-description-section {
+  margin: 0;
+}
+
+.vacancy-description-section .vacancy-description-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* ── Vacancy meta strip (plain label display) ────────────────────────────── */
+.vacancy-meta-section {
+  margin: 0;
+}
+
+.vacancy-meta-strip {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 36px 64px;
+  box-sizing: border-box;
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+  border-top: 1px solid #f2f2f2;
+}
+
+.vacancy-meta-strip > p {
+  font-size: 14px;
+  color: #767676;
+  font-weight: 400;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+@media (width < 600px) {
+  .vacancy-meta-strip {
+    padding: 24px;
+    gap: 16px;
+  }
+}
+

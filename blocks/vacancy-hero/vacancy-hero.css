@@ -1,195 +1,209 @@
-﻿/* ─────────────────────────────────────────────
+﻿/* ─────────────────────────────────────────────────────────────
    Vacancy Hero Block
-   EDS DOM: .vacancy-hero > div = row, > div > div = cell
+   Reference: deptagency.com hero layout at 1440 px
+   AEM DOM (after JS decoration):
+     .vacancy-hero
+       .vacancy-hero-main-row
+         .vacancy-hero-content   (left: overline, h1, share)
+         .vacancy-hero-images    (right: two stacked/side-by-side pictures)
+       .vacancy-hero-footer
+         .vacancy-hero-footer-scroll (scroll-down link)
+   ───────────────────────────────────────────────────────────── */
 
-   Selectors are ordered by specificity within each element family
-   (p, a, div, img, h1) to satisfy no-descending-specificity.
-   ───────────────────────────────────────────── */
-
-.vacancy-hero-container {
-  max-width: unset;
+/* ── Override global max-width on wrapper ─────────────────── */
+main > .section.vacancy-hero-container {
+  margin: 0;
   padding: 0;
 }
 
-.vacancy-hero-wrapper {
-  max-width: unset;
+main > .section.vacancy-hero-container > .vacancy-hero-wrapper {
+  max-width: none;
   padding: 0;
+  margin: 0;
 }
 
+/* ── Block root ───────────────────────────────────────────── */
 .vacancy-hero {
   background-color: #fff;
   display: grid;
   grid-template-rows: 1fr auto;
   min-height: 100svh;
-  padding: 0 64px;
+  width: 100%;
   box-sizing: border-box;
 }
 
-/* Row 1 grid */
-.vacancy-hero > div:first-child {
+/* ── Main content row ─────────────────────────────────────── */
+.vacancy-hero-main-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 40px;
-  padding-top: calc(var(--nav-height, 64px) + 48px);
-  padding-bottom: 32px;
+  align-items: end;
+  gap: 48px;
+  padding: calc(var(--nav-height, 64px) + 80px) 64px 48px;
 }
 
-/* Row 2 footer container (less specific div) */
-.vacancy-hero > div:last-child {
+/* ── Left content cell ────────────────────────────────────── */
+.vacancy-hero-content {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 0 36px;
-  border-top: 1px solid #f2f2f2;
+  flex-direction: column;
+  gap: 28px;
 }
 
-/* Footer locations — p family (0,3,3): less specific, declared first */
-.vacancy-hero > div:last-child > div:first-child > p {
-  font-size: 14px;
-  color: #767676;
+/* AEM wraps each picture in a <p> — less specific than p:first-of-type, declared first */
+.vacancy-hero-images > p {
+  margin: 0;
+  flex: 1;
+  overflow: hidden;
+  min-height: 360px;
+  max-height: 540px;
+}
+
+/* Second image: offset downward for stagger */
+.vacancy-hero-images > p:last-child {
+  align-self: flex-end;
+  margin-top: 56px;
+}
+
+/* Overline: "DEPT®/Paid Media" */
+.vacancy-hero-content > p:first-of-type {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.24px;
+  text-transform: uppercase;
+  color: #121212;
+  margin: 0;
+  line-height: 1.25;
+}
+
+/* H1 job title */
+.vacancy-hero-content > h1 {
+  font-size: clamp(40px, 5vw, 70px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #121212;
   margin: 0;
 }
 
-/* Footer scroll link — a family (0,3,3): least specific a, declared first */
-.vacancy-hero > div:last-child > div:last-child > a {
-  font-size: 14px;
+/* Share links container p — more specific than p:first-of-type, declared after it */
+.vacancy-hero-content > p:last-of-type {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: center;
+  margin: 0;
+  margin-top: 12px;
+}
+
+/* Individual share link */
+.vacancy-hero-content > p a {
   color: #121212;
-  text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  text-decoration: none;
   transition: color 0.2s;
 }
 
-/* Right cell images container */
-.vacancy-hero > div:first-child > div:last-child {
-  display: flex;
-  gap: 14px;
-  align-items: flex-end;
-  height: 100%;
-  max-height: 580px;
-  padding: 32px 0;
+/* Share link hover */
+.vacancy-hero-content > p a:hover {
+  color: #5115f7;
+  text-decoration: none;
 }
 
-/* Right cell AEM-wrapped picture p — p family (0,3,3): plain p, before pseudo-class p */
-.vacancy-hero > div:first-child > div:last-child > p {
-  margin: 0;
-  flex: 1;
+/* ── Right images cell ────────────────────────────────────── */
+.vacancy-hero-images {
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+  align-items: flex-start;
   height: 100%;
   overflow: hidden;
 }
 
-/* Share links container — p family (0,3,4): more specific than plain p */
-.vacancy-hero > div:first-child > div:first-child > p:has(> a) {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 0;
-}
-
-/* Share link icons — a family (0,3,5): more specific than footer a (0,3,3), before a:hover */
-.vacancy-hero > div:first-child > div:first-child > p:has(> a) > a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1.5px solid #c4c4c4;
-  border-radius: 50%;
-  color: #121212;
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 700;
-  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
-  flex-shrink: 0;
-}
-
-/* Footer scroll :hover — a family (0,4,3): more specific than share > a (0,3,5) */
-.vacancy-hero > div:last-child > div:last-child > a:hover {
-  color: #5115f7;
-}
-
-/* Share link :hover — a family (0,4,5): most specific a */
-.vacancy-hero > div:first-child > div:first-child > p:has(> a) > a:hover {
-  background-color: #5115f7;
-  border-color: #5115f7;
-  color: #fff;
-}
-
-/* Right cell second image offset — p family (0,4,3): more specific than p:has(0,3,4) */
-.vacancy-hero > div:first-child > div:last-child > p:last-child {
-  align-self: flex-start;
-  padding-top: 56px;
-}
-
-/* Right cell images */
-.vacancy-hero > div:first-child > div:last-child img {
+.vacancy-hero-images img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-/* Left cell flex column */
-.vacancy-hero > div:first-child > div:first-child {
+/* ── Footer row (scroll-down) ─────────────────────────────── */
+.vacancy-hero-footer {
+  align-items: center;
+  border-top: 1px solid #f2f2f2;
   display: flex;
-  flex-direction: column;
-  gap: 28px;
+  justify-content: flex-start;
+  padding: 20px 64px 36px;
 }
 
-/* H1 */
-.vacancy-hero > div:first-child > div:first-child > h1 {
-  font-size: clamp(42px, 4.5vw, 70px);
-  font-weight: 400;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+.vacancy-hero-footer-scroll {
+  display: flex;
+  align-items: center;
+}
+
+.vacancy-hero-scroll-link {
+  align-items: center;
   color: #121212;
-  margin: 0;
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  gap: 20px;
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
-/* Label — p family (0,4,3): most specific p, declared last */
-.vacancy-hero > div:first-child > div:first-child > p:first-of-type {
-  font-size: 15px;
-  font-weight: 400;
+.vacancy-hero-scroll-link:hover {
+  color: #5115f7;
+  text-decoration: none;
+}
+
+.vacancy-hero-scroll-label {
+  color: inherit;
+  font-size: 14px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #121212;
-  margin: 0;
 }
 
-/* ── Tablet ────────────────────────────────── */
+/* ── Tablet (600-899px) ───────────────────────────────────── */
 @media (width >= 600px) and (width < 900px) {
-  .vacancy-hero {
-    padding: 0 40px;
+  .vacancy-hero-main-row {
+    gap: 32px;
+    padding: calc(var(--nav-height, 64px) + 56px) 40px 40px;
+  }
+
+  .vacancy-hero-footer {
+    padding-left: 40px;
+    padding-right: 40px;
   }
 }
 
-/* ── Mobile ────────────────────────────────── */
+/* ── Mobile (< 600px) ────────────────────────────────────── */
 @media (width < 600px) {
-  .vacancy-hero {
-    padding: 0 24px;
-    grid-template-rows: auto auto;
-  }
-
-  .vacancy-hero > div:first-child {
-    grid-template-columns: 1fr;
+  .vacancy-hero-main-row {
     gap: 24px;
-    padding-top: calc(var(--nav-height, 64px) + 32px);
+    grid-template-columns: 1fr;
+    padding: calc(var(--nav-height, 64px) + 40px) 24px 32px;
   }
 
-  /* Row 2 footer: less-specific div before div:first-child > div:last-child */
-  .vacancy-hero > div:last-child {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .vacancy-hero > div:first-child > div:last-child {
-    display: none;
-  }
-
-  .vacancy-hero > div:first-child > div:first-child > h1 {
+  .vacancy-hero-content > h1 {
     font-size: 40px;
   }
+
+  .vacancy-hero-images {
+    max-height: 240px;
+    min-height: 200px;
+  }
+
+  .vacancy-hero-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }
+
+

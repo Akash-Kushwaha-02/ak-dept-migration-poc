@@ -1,10 +1,11 @@
-﻿/* ─────────────────────────────────────────────
+﻿/* ─────────────────────────────────────────────────────────────
    Vacancy Meta Block
    EDS DOM: .vacancy-meta > div (row) > div (cell)
    Rows displayed as horizontal flex items
-   ───────────────────────────────────────────── */
+   ───────────────────────────────────────────────────────────── */
 
-.vacancy-meta-wrapper {
+/* Override global wrapper max-width */
+main > .section > .vacancy-meta-wrapper {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 64px;
@@ -45,7 +46,7 @@
 }
 
 @media (width < 600px) {
-  .vacancy-meta-wrapper {
+  main > .section > .vacancy-meta-wrapper {
     padding: 0 24px;
   }
 
@@ -53,3 +54,4 @@
     gap: 24px;
   }
 }
+

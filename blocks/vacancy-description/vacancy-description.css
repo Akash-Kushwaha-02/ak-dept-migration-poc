@@ -1,11 +1,12 @@
-﻿/* ─────────────────────────────────────────────
+﻿/* ─────────────────────────────────────────────────────────────
    Vacancy Description Block
    EDS DOM:
      row 1 > cell: h2 + Apply link
      row 2 > cell: job content
-   ───────────────────────────────────────────── */
+   ───────────────────────────────────────────────────────────── */
 
-.vacancy-description-wrapper {
+/* Override global wrapper max-width */
+main > .section > .vacancy-description-wrapper {
   max-width: 1200px;
   margin: 0 auto;
   padding: 60px 64px 80px;
@@ -59,6 +60,8 @@
 
 .vacancy-description > div:first-child > div > a:hover {
   background-color: #3a0fc7;
+  text-decoration: none;
+  color: #fff;
 }
 
 /* Content-area link hover — same specificity as apply button hover, after plain a */
@@ -101,13 +104,13 @@
 }
 
 @media (width < 900px) {
-  .vacancy-description-wrapper {
+  main > .section > .vacancy-description-wrapper {
     padding: 48px 40px 64px;
   }
 }
 
 @media (width < 600px) {
-  .vacancy-description-wrapper {
+  main > .section > .vacancy-description-wrapper {
     padding: 40px 24px 56px;
   }
 
@@ -116,3 +119,4 @@
     gap: 20px;
   }
 }
+

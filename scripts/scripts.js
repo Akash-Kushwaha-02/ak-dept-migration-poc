@@ -123,6 +123,98 @@ export function decorateMain(main) {
 }
 
 /**
+ * On vacancy pages (/vacancy/*), transform the default-content-wrapper sections
+ * that were not converted to blocks into proper vacancy-meta and vacancy-description
+ * structures matching the expected block DOM.
+ * @param {Element} main
+ */
+function decorateVacancySections(main) {
+  if (!window.location.pathname.startsWith('/vacancy/')) return;
+
+  const sections = main.querySelectorAll('.section:not(.vacancy-hero-container):not(.culture-teaser-container)');
+  const defaultSections = [...sections].filter((s) => s.querySelector('.default-content-wrapper'));
+
+  defaultSections.forEach((section) => {
+    const wrapper = section.querySelector('.default-content-wrapper');
+    if (!wrapper) return;
+
+    const paragraphs = wrapper.querySelectorAll('p');
+    const firstParagraph = paragraphs[0];
+
+    // ── Description section: has an "Apply" link + HTML content ──────────────
+    const hasApplyLink = firstParagraph && firstParagraph.querySelector('a[title="Apply"]');
+    if (hasApplyLink) {
+      section.classList.add('vacancy-description-section');
+
+      // Build vacancy-description block structure
+      const blockWrapper = document.createElement('div');
+      blockWrapper.classList.add('vacancy-description-wrapper');
+
+      const block = document.createElement('div');
+      block.classList.add('vacancy-description', 'block');
+      block.setAttribute('data-block-name', 'vacancy-description');
+
+      // Row 1: title + apply button
+      const jobTitle = document.title
+        .replace(/\s*[-–—]\s*DEPT[®]?\s*$/i, '')
+        .replace(/\s*[-–—]\s*$/, '')
+        .trim();
+
+      const applyLink = firstParagraph.querySelector('a');
+      const jobId = window.location.pathname.match(/\/(\d+)/)?.[1] || '';
+      const source = encodeURIComponent(`${window.location.origin}/careers/roles/`);
+      const applyHref = jobId
+        ? `https://boards.greenhouse.io/dept/jobs/${jobId}?gh_source=${source}#app`
+        : (applyLink?.href || '#');
+
+      const headerRow = document.createElement('div');
+      headerRow.innerHTML = `<div><h2>${jobTitle}</h2><a href="${applyHref}" target="_blank" rel="noopener noreferrer">Apply</a></div>`;
+
+      // Row 2: job description content (unescape HTML)
+      const contentRow = document.createElement('div');
+      const contentCell = document.createElement('div');
+
+      let rawContent = '';
+      paragraphs.forEach((p, i) => {
+        if (i === 0) return; // skip Apply link paragraph
+        rawContent += p.textContent;
+      });
+
+      // Unescape HTML entities
+      const temp = document.createElement('div');
+      temp.innerHTML = rawContent;
+      const unescaped = temp.textContent || temp.innerText || '';
+
+      // Try to parse as HTML (the content was double-escaped)
+      const contentDiv = document.createElement('div');
+      contentDiv.innerHTML = unescaped;
+      contentCell.appendChild(contentDiv);
+      contentRow.appendChild(contentCell);
+
+      block.appendChild(headerRow);
+      block.appendChild(contentRow);
+      blockWrapper.appendChild(block);
+
+      // Replace the default-content-wrapper
+      wrapper.replaceWith(blockWrapper);
+      return;
+    }
+
+    // ── Meta section: has only label paragraphs (Department, Employment type) ─
+    const hasMeta = [...paragraphs].some((p) => {
+      const text = p.textContent.trim();
+      return text === 'Department' || text === 'Employment type' || text === 'Roles open in';
+    });
+
+    if (hasMeta) {
+      section.classList.add('vacancy-meta-section');
+      // Style the wrapper as a simple meta strip
+      wrapper.classList.add('vacancy-meta-strip');
+    }
+  });
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
@@ -155,6 +247,9 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+
+  // Enhance vacancy page sections that AEM serves as default content
+  decorateVacancySections(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
